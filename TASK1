@@ -1,0 +1,84 @@
+create database LIBRARY;
+use LIBRARY;
+
+
+create table books(book_id int auto_increment,
+ title varchar(30),
+ published_year int,
+ genre varchar(20), 
+ primary key(book_id));
+ 
+insert into books(title,published_year,genre) 
+values('To Kill a Mockingbird',1960,'Fiction'),
+('1984',1949,'Dystopian' ),
+('The Great Gatsby', 1925,'Fiction'),
+('War and Peace',1869, 'Historical Fiction'),
+('The Hobbit',1937,'Fantasy'),
+('The Chronicles of Narnia',1950, 'Fantasy'),
+('Crime and Punishment',1866,'Philosophical'),
+('The Alchemist',1988, 'Adventure');
+
+
+create table members(member_id varchar (10) not null,
+ Name varchar(20), 
+ email varchar(30), 
+ join_date date,
+ primary key(member_id) );
+ 
+insert into members(member_id,name,email,join_date) 
+values('1A','Fazil', 'fazil@gmail.com', '2024-01-01' ),
+('2A','karim', 'karim@gmail.com', '2024-01-10'),
+('3A','zaid', 'zaid@gmail.com', '2024-01-20'),
+('4A','allabakash', 'allabakash@gmail.com', '2024-01-25'),
+('5A','baba', 'baba@gmail.com', '2024-01-30');
+
+
+create table transaction_table(Trans_id int , 
+book_id int not null,
+ member_id varchar (10) not null, 
+ transaction_type varchar(10) NOT NULL, 
+ transaction_date date, 
+ foreign key(book_id)references books(book_id), 
+ foreign key(member_id)references members(member_id));
+ 
+insert into transaction_table 
+values(001,8,'5A','borrow', '2024-04-04'),
+(002,1,'1A','return', '2024-04-02'),
+(003,7,'2A','borrow', '2024-04-08'),
+(004,2,'4A','return', '2024-04-03'),
+(005,5,'2A','borrow', '2024-04-22'),
+(006,6,'5A','borrow', '2024-04-04'),
+(007,3,'5A','borrow', '2024-04-20'),
+(008,4,'5A','return', '2024-04-15');
+
+/*query to insert the data*/
+
+insert into books (title,published_year,genre) 
+values ('Brave New World', 1932, 'Dystopian');
+
+insert into members 
+values('6A', 'shaik', 'shaik123@gmail.com','2024-01-28');
+
+insert into transaction_table 
+values(009,9,'6A','return', '2024-04-29');
+
+/*query to update the data in the specific column*/
+
+update members set email='fazil12@gmail.com' where member_id='1A';
+update members set email='karim97@gmail.com' where member_id='2A';
+update transaction_table set book_id=3 where Trans_id=004;
+
+/*query to delete the data in the specific column*/
+
+delete from members where join_date='2024-01-25' ;
+delete from transaction_table where transaction_type = 'return' ;
+delete from transaction_table where book_id = 7 ;
+
+/*query to retrieve the data using different conditions*/
+
+select*from books;
+select*from members;
+select*from transaction_table;
+select*from books where genre='Fiction';
+select member_id, join_date from  members ;
+select member_id from transaction_table where transaction_type = 'return';
