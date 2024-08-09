@@ -56,6 +56,6 @@ Document the database design, including the schema and relationships.
 Provide clear instructions on how to use the database and perform common tasks.
 
 11.Maintenance  
-Regularly update and maintain the database.
+Regularly update and maintain the database.  
 Ensure that the data remains accurate and up-to-date.
 
